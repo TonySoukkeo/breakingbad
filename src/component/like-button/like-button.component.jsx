@@ -1,13 +1,13 @@
 import React from "react";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
-const LikeButton = () => {
+const LikeButton = ({ style: userStyles = {}, classNa }) => {
   const handleLikeClick = () => {
     console.log("Liked");
   };
   return (
     <button onClick={handleLikeClick}>
-      like
-      {/** heart icon ***/}
+      <FavoriteBorderIcon />
     </button>
   );
 };

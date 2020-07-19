@@ -9,6 +9,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import LikeButton from "../like-button/like-button.component";
 
 import useStyles from "./character-card.style";
 import { default as useGlobalStyles } from "../../util/styles";
@@ -22,6 +23,8 @@ const CharacterCard = React.forwardRef(({ name, img, nickname, id }, ref) => {
       <CardActionArea component="div">
         <Link to={`/character/${id}`} className={globalClasses.link}>
           <Card className={classes.card}>
+            {/** Like Button */}
+            <LikeButton />
             {/** Character Card Image **/}
             <CardMedia
               className={classes.media}
