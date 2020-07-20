@@ -18,10 +18,12 @@ const CharacterCard = React.forwardRef(({ name, img, nickname, id }, ref) => {
   const classes = useStyles();
   const globalClasses = useGlobalStyles();
 
+  // to={`/character/${id}`}
+
   return (
     <Grid ref={ref} item xs={12} md={3}>
       <CardActionArea component="div">
-        <Link to={`/character/${id}`} className={globalClasses.link}>
+        <Link className={globalClasses.link}>
           <Card className={classes.card}>
             {/** Like Button */}
             <LikeButton className={classes.likeButton}>
