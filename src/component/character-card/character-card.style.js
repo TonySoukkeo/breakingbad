@@ -10,11 +10,8 @@ const useStyles = makeStyles({
   },
   likeButton: {
     position: "absolute",
-    top: 0,
-    right: 0,
-  },
-  heartIcon: {
-    fontSize: "3rem",
+    top: 10,
+    right: 10,
   },
 });
 

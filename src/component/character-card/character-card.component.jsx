@@ -25,7 +25,7 @@ const CharacterCard = React.forwardRef(({ name, img, nickname, id }, ref) => {
           <Card className={classes.card}>
             {/** Like Button */}
             <LikeButton className={classes.likeButton}>
-              <LikeButton.HeartIcon className={classes.heartIcon} />
+              <LikeButton.HeartIcon />
             </LikeButton>
             {/** Character Card Image **/}
             <CardMedia
