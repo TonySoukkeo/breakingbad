@@ -8,6 +8,14 @@ const useStyles = makeStyles({
   media: {
     height: 560,
   },
+  likeButton: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+  },
+  heartIcon: {
+    fontSize: "3rem",
+  },
 });
 
 export default useStyles;
