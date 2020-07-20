@@ -4,6 +4,7 @@ const likeButtonStyles = makeStyles({
   button: {
     backgroundColor: "transparent",
     border: "none",
+    cursor: "pointer",
   },
 });
 
