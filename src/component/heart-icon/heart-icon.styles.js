@@ -7,6 +7,7 @@ const HeartIconStyles = makeStyles({
     fillOpacity: ".5",
     stroke: "white",
     strokeWidth: ".4",
+    transition: "all .2s ease-in",
   },
 });
 
