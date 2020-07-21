@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 // Components
 import HeartIcon from "../heart-icon/heart-icon.component";
@@ -21,10 +21,25 @@ const LikeButton = ({ children, style: userStyles = {}, className }) => {
     .trim();
 
   const [setRefs, refsState] = useDOMRefs();
-  const onClickTimeline = useHeartAnimation(refsState);
+  const {
+    onClickTimeline,
+    onHoverTimeline,
+    onHoverOutTimeline,
+  } = useHeartAnimation(refsState);
+
+  const isClicked = useRef(false);
 
   const handleLikeClick = () => {
+    isClicked.current = !isClicked.current;
     onClickTimeline.replay();
+  };
+
+  const handleMouseEnter = () => {
+    if (!isClicked.current) onHoverTimeline.replay();
+  };
+
+  const handleMouseLeave = () => {
+    if (!isClicked.current) onHoverOutTimeline.replay();
   };
 
   return (
@@ -33,6 +48,8 @@ const LikeButton = ({ children, style: userStyles = {}, className }) => {
         style={userStyles}
         className={classNames}
         onClick={handleLikeClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         {children}
       </button>
