@@ -36,7 +36,7 @@ const LikeButton = ({
         className={classNames}
         {...otherProps}
         {...eventHandlerProps({
-          onClick: () => onClick({ isClicked: isClicked.current }),
+          onClick: (e) => onClick({ isClicked: isClicked.current, event: e }),
           onMouseLeave,
           onMouseEnter,
         })}
