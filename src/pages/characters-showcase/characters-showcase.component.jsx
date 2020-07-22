@@ -18,6 +18,7 @@ const CharactersShowcase = ({
   hasMore,
   getCharactersStart,
   isCharactersLoading,
+  addCharacterToFavorites,
 }) => {
   const classes = useStyles();
 
@@ -35,6 +36,7 @@ const CharactersShowcase = ({
               name={character.name}
               img={character.img}
               nickname={character.nickname}
+              addCharacterToFavorites={addCharacterToFavorites}
             />
           );
         })}

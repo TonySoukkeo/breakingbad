@@ -14,51 +14,49 @@ import LikeButton from "../like-button/like-button.component";
 import useStyles from "./character-card.style";
 import { default as useGlobalStyles } from "../../util/styles";
 
-const CharacterCard = React.forwardRef(({ name, img, nickname, id }, ref) => {
-  const classes = useStyles();
-  const globalClasses = useGlobalStyles();
+const CharacterCard = React.forwardRef(
+  ({ name, img, nickname, id, addCharacterToFavorites }, ref) => {
+    const classes = useStyles();
+    const globalClasses = useGlobalStyles();
 
-  const handleAddToFavorite = (props) => {
-    console.log("Add character to favorite", props);
-  };
+    return (
+      <Grid ref={ref} item xs={12} md={3}>
+        <CardActionArea component="div">
+          <Card className={classes.card}>
+            {/** Like Button */}
+            <LikeButton
+              onClick={() => addCharacterToFavorites({ name, id })}
+              className={classes.likeButton}
+            >
+              <LikeButton.HeartIcon />
+            </LikeButton>
 
-  return (
-    <Grid ref={ref} item xs={12} md={3}>
-      <CardActionArea component="div">
-        <Card className={classes.card}>
-          {/** Like Button */}
-          <LikeButton
-            onClick={handleAddToFavorite}
-            className={classes.likeButton}
-          >
-            <LikeButton.HeartIcon />
-          </LikeButton>
+            <Link to={`/character/${id}`}>
+              {/** Character Card Image **/}
+              <CardMedia
+                className={classes.media}
+                component="img"
+                image={img}
+                title={name}
+              />
 
-          <Link to={`/character/${id}`}>
-            {/** Character Card Image **/}
-            <CardMedia
-              className={classes.media}
-              component="img"
-              image={img}
-              title={name}
-            />
-
-            {/** Character Card Details **/}
-            <CardContent>
-              <Typography
-                className={globalClasses["text-bold"]}
-                component="h2"
-                align="center"
-              >
-                {name} ({nickname})
-              </Typography>
-            </CardContent>
-          </Link>
-        </Card>
-      </CardActionArea>
-    </Grid>
-  );
-});
+              {/** Character Card Details **/}
+              <CardContent>
+                <Typography
+                  className={globalClasses["text-bold"]}
+                  component="h2"
+                  align="center"
+                >
+                  {name} ({nickname})
+                </Typography>
+              </CardContent>
+            </Link>
+          </Card>
+        </CardActionArea>
+      </Grid>
+    );
+  }
+);
 
 CharacterCard.propTypes = {
   name: PropTypes.string,

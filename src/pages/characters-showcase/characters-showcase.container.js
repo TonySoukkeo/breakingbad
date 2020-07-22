@@ -12,6 +12,7 @@ import { checkIfLoading } from "../../redux/ui/ui.selector";
 
 // Actions
 import { getCharactersStart } from "../../redux/characters/characters.actions";
+import { addCharacterToFavorites } from "../../redux/user/user.actions";
 
 // Action Types
 import CharactersTypes from "../../redux/characters/characters.constants";
@@ -24,6 +25,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   getCharactersStart: (page) => dispatch(getCharactersStart(page)),
+  addCharacterToFavorites: (character) =>
+    dispatch(addCharacterToFavorites(character)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CharacterShowcase);
