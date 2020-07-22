@@ -1,17 +1,26 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useState, useRef, useLayoutEffect, useCallback } from "react";
 import mojs from "@mojs/core";
 
+// Util
+import callFnsInSequence from "../../util/callFnsInSequence";
+
+// Custom hooks
+import useDOMRefs from "../refs/useDOMRefs";
+
+// Animation configurations
 const SCALE_UP_SIZE = 2.8;
 const DURATION = 50;
-
 const mojsTimeline = () => new mojs.Timeline();
 
-const useHeartAnimation = ({ heartIcon }) => {
+const useLikeButtonState = () => {
   const [onClickTimeline, setOnClickTimeline] = useState(mojsTimeline);
 
   const [onHoverTimeline, setOnHoverTimeline] = useState(mojsTimeline);
 
   const [onHoverOutTimeline, setOnHoverOutTimeline] = useState(mojsTimeline);
+
+  const [setRefs, refsState] = useDOMRefs();
+  const { heartIcon } = refsState;
 
   useLayoutEffect(() => {
     if (!heartIcon) return;
@@ -65,7 +74,39 @@ const useHeartAnimation = ({ heartIcon }) => {
     setOnHoverOutTimeline(newOnHoverOutTimeline);
   }, [heartIcon, onClickTimeline, onHoverTimeline, onHoverOutTimeline]);
 
-  return { onClickTimeline, onHoverTimeline, onHoverOutTimeline };
+  const isClicked = useRef(false);
+
+  // Event handlers functions
+  const handleLikeClick = useCallback(() => {
+    isClicked.current = !isClicked.current;
+    onClickTimeline.replay();
+  }, [onClickTimeline]);
+
+  const handleMouseEnter = useCallback(() => {
+    if (!isClicked.current) onHoverTimeline.replay();
+  }, [onHoverTimeline]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!isClicked.current) onHoverOutTimeline.replay();
+  }, [onHoverOutTimeline]);
+
+  const eventHandlerProps = ({
+    onClick,
+    onMouseEnter,
+    onMouseLeave,
+    ...otherProps
+  }) => ({
+    onClick: callFnsInSequence(handleLikeClick, onClick),
+    onMouseEnter: callFnsInSequence(handleMouseEnter, onMouseEnter),
+    onMouseLeave: callFnsInSequence(handleMouseLeave, onMouseLeave),
+    ...otherProps,
+  });
+
+  return {
+    setRefs,
+    eventHandlerProps,
+    isClicked,
+  };
 };
 
-export default useHeartAnimation;
+export default useLikeButtonState;

@@ -18,12 +18,19 @@ const CharacterCard = React.forwardRef(({ name, img, nickname, id }, ref) => {
   const classes = useStyles();
   const globalClasses = useGlobalStyles();
 
+  const handleAddToFavorite = () => {
+    console.log("Add character to favorite");
+  };
+
   return (
     <Grid ref={ref} item xs={12} md={3}>
       <CardActionArea component="div">
         <Card className={classes.card}>
           {/** Like Button */}
-          <LikeButton className={classes.likeButton}>
+          <LikeButton
+            onClick={handleAddToFavorite}
+            className={classes.likeButton}
+          >
             <LikeButton.HeartIcon />
           </LikeButton>
 
