@@ -12,7 +12,8 @@ export default (function () {
 
     switch (action.type) {
       case "add":
-        itemExists = ls.includes((lsItem) => lsItem.id === action.payload.id);
+        itemExists = ls.find((lsItem) => lsItem.id === action.payload.id);
+
         if (!itemExists) {
           ls.push(action.payload);
         }
