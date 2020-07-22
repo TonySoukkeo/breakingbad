@@ -27,7 +27,7 @@ const LikeButton = ({
     .join(" ")
     .trim();
 
-  const { setRefs, eventHandlerProps } = useLikeButtonState();
+  const { setRefs, eventHandlerProps, isClicked } = useLikeButtonState();
 
   return (
     <LikeButtonContext.Provider value={setRefs}>
@@ -36,7 +36,7 @@ const LikeButton = ({
         className={classNames}
         {...otherProps}
         {...eventHandlerProps({
-          onClick,
+          onClick: () => onClick({ isClicked: isClicked.current }),
           onMouseLeave,
           onMouseEnter,
         })}

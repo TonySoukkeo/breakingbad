@@ -18,7 +18,7 @@ const CharacterCard = React.forwardRef(({ name, img, nickname, id }, ref) => {
   const classes = useStyles();
   const globalClasses = useGlobalStyles();
 
-  const handleAddToFavorite = () => {
+  const handleAddToFavorite = ({ isClicked }) => {
     console.log("Add character to favorite", id);
   };
 
